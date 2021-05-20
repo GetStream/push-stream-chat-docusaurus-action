@@ -1,0 +1,39 @@
+name: 'Push Stream Chat Docusaurus files to central repo'
+description: 'Push Stream Chat Docusaurus files from individual SDKs to central repo'
+inputs:
+  commit-message:
+    default: 'Update from ORIGIN_COMMIT'
+    description: '[Optional] commit message for the output repository. ORIGIN_COMMIT is replaced by the URL@commit in the origin repo'
+    required: false
+  destination-github-username:
+    default: 'GetStream'
+    description: 'Name of the destination username/organization'
+    required: false
+  destination-repository-name:
+    default: 'stream-chat-docusaurus'
+    description: 'Destination repository'
+    required: false
+  source-directory:
+    default: 'docusaurus'
+    description: 'Source directory from the origin directory'
+    required: false
+  target-branch:
+    default: 'main'
+    description: '[Optional] set target branch name for the destination repository. Defaults to "main"'
+    required: false
+  user-name:
+    default: 'stream-ci-bot'
+    description: '[Optional] Name for the git commit. Defaults to the CI Bot name'
+    required: false
+runs:
+  using: 'composite'
+  steps:
+    - run: ${{ github.action_path }}/push.sh
+      shell: bash
+      env:
+        COMMIT_MESSAGE: ${{ inputs.commit-message }}
+        DESTINATION_GITHUB_USERNAME: ${{ inputs.destination-github-username }}
+        DESTINATION_REPOSITORY_NAME: ${{ inputs.destination-repository-name }}
+        SOURCE_DIRECTORY: ${{ inputs.source-directory }}
+        TARGET_BRANCH: ${{ inputs.target-branch }}
+        USER_NAME: ${{ inputs.user-name }}
