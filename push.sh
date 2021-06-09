@@ -14,8 +14,8 @@ SDKs=(`find ./$SOURCE_DIRECTORY/docs -maxdepth 1 -mindepth 1 -type d | awk -F'/'
 for sdk in "${SDKs[@]}"
 do
     echo "Deleting all contents of $sdk in target git repository and copying current over"
-    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 1 -mindepth 1 -type f -iname "*${sdk/ /}*" -exec $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
-    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 2 -mindepth 1 -type d -iname "*${sdk/ /}*" -exec $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
+    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 1 -mindepth 1 -type f -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
+    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 2 -mindepth 1 -type d -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
     ls -la $CLONE_DIR/$SOURCE_DIRECTORY
 done
 cp -a "$SOURCE_DIRECTORY"/. "$CLONE_DIR/$SOURCE_DIRECTORY"
