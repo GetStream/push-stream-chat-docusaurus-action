@@ -37,3 +37,4 @@ runs:
         SOURCE_DIRECTORY: ${{ inputs.source-directory }}
         TARGET_BRANCH: ${{ inputs.target-branch }}
         USER_NAME: ${{ inputs.user-name }}
+        ACTION_PATH: ${{ github.action_path }}
