@@ -29,7 +29,9 @@ runs:
   using: 'composite'
   steps:
     - run: npm install -g https://github.com/GetStream/stream-chat-docusaurus-cli
+      shell: bash
     - run: npx stream-chat-docusaurus -i -b
+      shell: bash
     - run: ${{ github.action_path }}/push.sh
       shell: bash
       env:
