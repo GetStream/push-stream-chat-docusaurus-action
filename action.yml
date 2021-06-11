@@ -30,9 +30,11 @@ runs:
   steps:
     - run: npm install -g https://github.com/GetStream/stream-chat-docusaurus-cli
       env:
-        NPM_CONFIG_PREFIX: "~/.npm-global"
+        NPM_CONFIG_PREFIX: '~/.npm-global'
       shell: bash
     - run: npx stream-chat-docusaurus -i -b
+      env:
+        NPM_CONFIG_PREFIX: '~/.npm-global'
       shell: bash
     - run: ${{ github.action_path }}/push.sh
       shell: bash
