@@ -28,12 +28,9 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Install CLI
-      run: npm install -g https://github.com/GetStream/stream-chat-docusaurus-cli
-    - name: Build
-      run: npx stream-chat-docusaurus -i -b
-    - name: Push
-      run: ${{ github.action_path }}/push.sh
+    - run: npm install -g https://github.com/GetStream/stream-chat-docusaurus-cli
+    - run: npx stream-chat-docusaurus -i -b
+    - run: ${{ github.action_path }}/push.sh
       shell: bash
       env:
         COMMIT_MESSAGE: ${{ inputs.commit-message }}
