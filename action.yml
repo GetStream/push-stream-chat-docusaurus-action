@@ -18,8 +18,8 @@ inputs:
     description: 'Source directory from the origin directory'
     required: false
   target-branch:
-    default: 'main'
-    description: '[Optional] set target branch name for the destination repository. Defaults to "main"'
+    default: 'staging'
+    description: '[Optional] set target branch name for the destination repository. Defaults to "staging"'
     required: false
   user-name:
     default: 'stream-ci-bot'
