@@ -19,7 +19,7 @@ do
     ls -la $CLONE_DIR/$SOURCE_DIRECTORY
 done
 cp -a "$SOURCE_DIRECTORY"/. "$CLONE_DIR/$SOURCE_DIRECTORY"
-find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 1 -mindepth 1 -type f -iname '*plugin.js' -exec rm -f {} \; # remove any custom plugins
+
 cd "$CLONE_DIR"
 
 ORIGIN_COMMIT="https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
