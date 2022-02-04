@@ -15,8 +15,10 @@ for sdk in "${SDKs[@]}"
 do
     echo "Deleting all contents of $sdk in target git repository and copying current over"
     find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 1 -mindepth 1 -type f -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
-    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 2 -mindepth 1 -type d -prune -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
+    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 1 -mindepth 1 -type d -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
+    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 2 -mindepth 2 -type d -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
     ls -la $CLONE_DIR/$SOURCE_DIRECTORY
+    ls -la $CLONE_DIR/$SOURCE_DIRECTORY/docs
 done
 cp -a "$SOURCE_DIRECTORY"/. "$CLONE_DIR/$SOURCE_DIRECTORY"
 

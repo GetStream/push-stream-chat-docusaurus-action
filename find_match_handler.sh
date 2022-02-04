@@ -7,5 +7,6 @@ path_lowercase=`echo "$2" | tr '[:upper:]' '[:lower:]'`
 if [ "$sdk_lowercase_no_space" == "react" ] && [[ "$path_lowercase" == *reactnative* ]]; then
 	echo "Skipping: $2"
 else
+	echo "Deleting: $2"
 	rm -rf $2
 fi
