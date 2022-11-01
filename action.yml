@@ -35,6 +35,8 @@ runs:
         npm install -g https://github.com/GetStream/stream-chat-docusaurus-cli#$TARGET_BRANCH
         stream-chat-docusaurus -i -b
       shell: bash
+      env:
+        TARGET_BRANCH: ${{ inputs.target-branch }}
     - run: ${{ github.action_path }}/push.sh
       shell: bash
       env:
