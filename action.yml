@@ -32,7 +32,7 @@ runs:
         mkdir ~/.npm-global
         npm config set prefix '~/.npm-global'
         PATH=~/.npm-global/bin:$PATH
-        npm install -g https://github.com/GetStream/stream-chat-docusaurus-cli
+        npm install -g https://github.com/GetStream/stream-chat-docusaurus-cli#$TARGET_BRANCH
         stream-chat-docusaurus -i -b
       shell: bash
     - run: ${{ github.action_path }}/push.sh
