@@ -29,11 +29,13 @@ runs:
   using: 'composite'
   steps:
     - run: |
-        mkdir ~/.npm-global
-        npm config set prefix '~/.npm-global'
-        PATH=~/.npm-global/bin:$PATH
-        npm install -g https://github.com/GetStream/stream-chat-docusaurus-cli#$TARGET_BRANCH
-        stream-chat-docusaurus -i -b
+        export WORK_DIR=`mktemp -d`
+        git clone https://github.com/GetStream/stream-chat-docusaurus-cli.git -b $TARGET_BRANCH --depth 1 $WORK_DIR
+        cd $WORK_DIR
+        npm i --force
+        npm i -g
+        cd -
+        npx stream-chat-docusaurus -b
       shell: bash
       env:
         TARGET_BRANCH: ${{ inputs.target-branch }}
