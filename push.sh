@@ -10,17 +10,17 @@ git config --global user.name "$USER_NAME"
 git clone --single-branch --branch "$TARGET_BRANCH" "https://$USER_NAME:$DOCUSAURUS_GH_TOKEN@github.com/$DESTINATION_GITHUB_USERNAME/$DESTINATION_REPOSITORY_NAME.git" "$CLONE_DIR"
 ls -la "$CLONE_DIR"
 
-SDKs=(`find ./$SOURCE_DIRECTORY/docs -maxdepth 1 -mindepth 1 -type d | awk -F'/' '{print $4}'`)
+SDKs=(`find ./$SOURCE_DIRECTORY/docs -maxdepth 1 -mindepth 1 -type d | awk -F'/' '{print $NF}'`)
 for sdk in "${SDKs[@]}"
 do
     echo "Deleting all contents of $sdk in target git repository and copying current over"
-    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 1 -mindepth 1 -type f -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
-    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 1 -mindepth 1 -type d -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
-    find $CLONE_DIR/$SOURCE_DIRECTORY -maxdepth 2 -mindepth 2 -type d -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
-    ls -la $CLONE_DIR/$SOURCE_DIRECTORY
-    ls -la $CLONE_DIR/$SOURCE_DIRECTORY/docs
+    find $CLONE_DIR/docusaurus -maxdepth 1 -mindepth 1 -type f -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
+    find $CLONE_DIR/docusaurus -maxdepth 1 -mindepth 1 -type d -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
+    find $CLONE_DIR/docusaurus -maxdepth 2 -mindepth 2 -type d -iname "*${sdk/ /}*" -exec bash $ACTION_PATH/find_match_handler.sh ${sdk/ /} {} \;
+    ls -la $CLONE_DIR/docusaurus
+    ls -la $CLONE_DIR/docusaurus/docs
 done
-cp -a "$SOURCE_DIRECTORY"/. "$CLONE_DIR/$SOURCE_DIRECTORY"
+cp -a "$SOURCE_DIRECTORY"/. "$CLONE_DIR/docusaurus"
 
 cd "$CLONE_DIR"
 

@@ -35,10 +35,13 @@ runs:
         npm i --force
         npm i -g
         cd -
+        cd $SOURCE_DIR
+        cd ..
         npx stream-chat-docusaurus -b
       shell: bash
       env:
         TARGET_BRANCH: ${{ inputs.target-branch }}
+        SOURCE_DIR: ${{ inputs.source-directory }}
     - run: ${{ github.action_path }}/push.sh
       shell: bash
       env:
