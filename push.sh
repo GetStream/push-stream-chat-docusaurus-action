@@ -28,6 +28,11 @@ ORIGIN_COMMIT="https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
 COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
 COMMIT_MESSAGE="${COMMIT_MESSAGE/\$GITHUB_REF/$GITHUB_REF}"
 
+# avoid overriding the .env file with the one from the target directory
+if [ -f ".env" ]; then
+    git checkout ".env"
+fi
+
 git add .
 git status
 
