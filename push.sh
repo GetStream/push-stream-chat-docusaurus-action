@@ -29,8 +29,8 @@ COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
 COMMIT_MESSAGE="${COMMIT_MESSAGE/\$GITHUB_REF/$GITHUB_REF}"
 
 # avoid overriding the .env file with the one from the target directory
-if [ -f ".env" ]; then
-    git checkout ".env"
+if [ -f "docusaurus/.env" ]; then
+    git checkout "docusaurus/.env"
 fi
 
 git add .
