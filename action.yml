@@ -1,32 +1,35 @@
-name: 'Push Stream Chat Docusaurus files to central repo'
-description: 'Push Stream Chat Docusaurus files from individual SDKs to central repo'
+name: "Push Stream Chat Docusaurus files to central repo"
+description: "Push Stream Chat Docusaurus files from individual SDKs to central repo"
 inputs:
   commit-message:
-    default: 'Update from ORIGIN_COMMIT'
-    description: '[Optional] commit message for the output repository. ORIGIN_COMMIT is replaced by the URL@commit in the origin repo'
+    default: "Update from ORIGIN_COMMIT"
+    description: "[Optional] commit message for the output repository. ORIGIN_COMMIT is replaced by the URL@commit in the origin repo"
     required: false
   destination-github-username:
-    default: 'GetStream'
-    description: 'Name of the destination username/organization'
+    default: "GetStream"
+    description: "Name of the destination username/organization"
     required: false
   destination-repository-name:
-    default: 'stream-chat-docusaurus'
-    description: 'Destination repository'
+    default: "stream-chat-docusaurus"
+    description: "Destination repository"
     required: false
   source-directory:
-    default: 'docusaurus'
-    description: 'Source directory from the origin directory'
+    default: "docusaurus"
+    description: "Source directory from the origin directory"
     required: false
   target-branch:
-    default: 'staging'
+    default: "staging"
     description: '[Optional] set target branch name for the destination repository. Defaults to "staging"'
     required: false
+  cli-target-branch:
+    description: "[Optional] set target branch name for the docusaurus cli repository."
+    required: false
   user-name:
-    default: 'stream-ci-bot'
-    description: '[Optional] Name for the git commit. Defaults to the CI Bot name'
+    default: "stream-ci-bot"
+    description: "[Optional] Name for the git commit. Defaults to the CI Bot name"
     required: false
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - run: |
         export WORK_DIR=`mktemp -d`
@@ -40,7 +43,7 @@ runs:
         npx stream-chat-docusaurus -b
       shell: bash
       env:
-        TARGET_BRANCH: ${{ inputs.target-branch }}
+        TARGET_BRANCH: ${{ inputs.cli-target-branch || inputs.target-branch }}
         SOURCE_DIR: ${{ inputs.source-directory }}
     - run: ${{ github.action_path }}/push.sh
       shell: bash
